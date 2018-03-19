@@ -1,0 +1,6 @@
+EXPLAIN SELECT `tbl_exam`.*, COUNT(DISTINCT tbl_user_rsm.rsm_code) AS rsm_counter, `tbl_exam`.`tbl_business_business_code`
+  FROM `tbl_exam` LEFT JOIN `tbl_exam_assign` ON `tbl_exam_assign`.`tbl_exam_exam_id` = `tbl_exam`.`exam_id`
+  LEFT JOIN `tbl_user_pso` ON `tbl_user_pso`.`pso_id` = `tbl_exam_assign`.`tbl_pso_pso_id`
+  LEFT JOIN `tbl_user_dsm` ON `tbl_user_dsm`.`dsm_code` = `tbl_user_pso`.`tbl_user_dsm_dsm_code`
+  LEFT JOIN `tbl_user_rsm` ON `tbl_user_rsm`.`rsm_code` = `tbl_user_dsm`.`tbl_user_rsm_rsm_code`
+WHERE `tbl_exam`.`status` = '1' GROUP BY `tbl_exam`.`exam_id` ORDER BY `tbl_exam`.`exam_name` ASC;
